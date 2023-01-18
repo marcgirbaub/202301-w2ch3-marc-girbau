@@ -8,45 +8,45 @@ function addition(arrayAddition) {
 
   if (Number.isInteger(result)) {
     return Number(result);
-  } else {
-    return parseFloat(result.toFixed(3));
   }
+
+  return parseFloat(result.toFixed(3));
 }
 
 function substraction(arraySubstraction) {
-  let result = arraySubstraction.reduce(
+  const result = arraySubstraction.reduce(
     (accumulator, currentValue) => accumulator - currentValue
   );
 
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return parseFloat(result.toFixed(3));
   }
+
+  return parseFloat(result.toFixed(3));
 }
 
 function multiplication(arrayMultiplication) {
-  let result = arrayMultiplication.reduce(
+  const result = arrayMultiplication.reduce(
     (accumulator, currentValue) => accumulator * currentValue
   );
 
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return parseFloat(result.toFixed(3));
   }
+
+  return parseFloat(result.toFixed(3));
 }
 
 function division(arrayDivision) {
-  let result = arrayDivision.reduce(
+  const result = arrayDivision.reduce(
     (accumulator, currentValue) => accumulator / currentValue
   );
 
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return parseFloat(result.toFixed(3));
   }
+
+  return parseFloat(result.toFixed(3));
 }
 
 function sqaureRoot(num1) {
@@ -60,7 +60,9 @@ function askIfAnotherOperation() {
 
   if (userResponse === "yes") {
     return true;
-  } else if (userResponse !== "yes" && userResponse !== "no") {
+  }
+
+  if (userResponse !== "yes" && userResponse !== "no") {
     alert("Please type 'yes' or 'no'");
     askIfAnotherOperation();
   } else {
@@ -70,7 +72,7 @@ function askIfAnotherOperation() {
 
 function getNumbers() {
   let numberToOperate;
-  let arrayToOperate = [];
+  const arrayToOperate = [];
   do {
     numberToOperate = prompt(
       "Type a number to operate. If you wish to stop type '='"
@@ -81,10 +83,6 @@ function getNumbers() {
       alert("You are required to introduce a number");
     } else if (numberToOperate !== "=") {
       arrayToOperate.push(numberToOperate);
-    } else {
-      if (numberToOperate !== "=") {
-        alert("An error has occurred, add another number");
-      }
     }
   } while (numberToOperate !== "=");
 
@@ -104,10 +102,10 @@ function calculatorPro() {
     alert("Error, negative values have no square root");
     calculatorPro();
   } else {
-    let resultAddition = addition(arrayToOperate);
-    let resultSubstraction = substraction(arrayToOperate);
-    let resultMultiplication = multiplication(arrayToOperate);
-    let resultDivision = division(arrayToOperate);
+    const resultAddition = addition(arrayToOperate);
+    const resultSubstraction = substraction(arrayToOperate);
+    const resultMultiplication = multiplication(arrayToOperate);
+    const resultDivision = division(arrayToOperate);
 
     alert(`The values introduced are ${arrayToOperate} and the results of the operations are the following:
     Addition = ${resultAddition}

@@ -13,11 +13,11 @@ const getName = () => {
 };
 
 const generateMyCard = () => {
-  let bingoCard = [];
-  let allNumbers = [];
+  const bingoCard = [];
+  const allNumbers = [];
 
   for (let i = 0; i < 3; i++) {
-    let currentline = [];
+    const currentline = [];
 
     for (let j = 0; j < 5; j++) {
       let currentNumber;
@@ -28,7 +28,7 @@ const generateMyCard = () => {
         isNumberRepeated = allNumbers.includes(currentNumber);
       } while (isNumberRepeated);
 
-      let objectNumber = { number: currentNumber, matched: false };
+      const objectNumber = { number: currentNumber, matched: false };
 
       currentline.push(objectNumber);
       allNumbers.push(currentNumber);
@@ -41,13 +41,13 @@ const generateMyCard = () => {
 };
 
 const showMyCard = (bingoCard) => {
-  let bingoTable = [];
+  const bingoTable = [];
 
   bingoCard.forEach((row) => {
-    let eachRow = [];
+    const eachRow = [];
 
     for (let i = 0; i < row.length; i++) {
-      let currentNumber = row[i];
+      const currentNumber = row[i];
 
       if (currentNumber.matched) {
         eachRow.push("X");
@@ -55,6 +55,7 @@ const showMyCard = (bingoCard) => {
         eachRow.push(currentNumber.number);
       }
     }
+
     eachRow.sort((a, b) => a - b);
     bingoTable.push(eachRow);
   });
@@ -77,23 +78,23 @@ const wishToStickWithCard = () => {
 };
 
 const askIfLeaving = () => {
-  let wishToLeave = confirm("Are you sure you want to quit the game?");
+  const wishToLeave = confirm("Are you sure you want to quit the game?");
 
   if (wishToLeave) {
     return true;
-  } else {
-    false;
   }
+
+  return false;
 };
 
 const confirmNextTurn = () => {
-  let nextTurn = confirm("Do you want to proceed?");
+  const nextTurn = confirm("Do you want to proceed?");
 
   if (!nextTurn && askIfLeaving()) {
     return false;
-  } else {
-    return true;
   }
+
+  return true;
 };
 
 const generateRandomNumberNotYetPlayed = (playedNumbers) => {
@@ -108,10 +109,10 @@ const generateRandomNumberNotYetPlayed = (playedNumbers) => {
 
 const checkIfMatched = (number, bingoCard) => {
   for (let i = 0; i < bingoCard.length; i++) {
-    let currentline = bingoCard[i];
+    const currentline = bingoCard[i];
 
     for (let j = 0; j < currentline.length; j++) {
-      let currentPosition = currentline[j];
+      const currentPosition = currentline[j];
 
       if (currentPosition.number === number) {
         currentPosition.matched = true;
@@ -122,6 +123,7 @@ const checkIfMatched = (number, bingoCard) => {
       }
     }
   }
+
   return false;
 };
 
@@ -129,14 +131,14 @@ const checkIfLine = (number, bingoCard) => {
   let numberOfMatched = 0;
 
   for (let i = 0; i < bingoCard.length; i++) {
-    let currentLine = bingoCard[i];
+    const currentLine = bingoCard[i];
 
     for (let j = 0; j < currentLine.length; j++) {
-      let currentNumber = currentLine[j];
+      const currentNumber = currentLine[j];
 
       if (currentNumber.number === number) {
         for (let k = 0; k < currentLine.length; k++) {
-          if (currentLine[k]["matched"]) {
+          if (currentLine[k].matched) {
             numberOfMatched++;
           }
         }
@@ -151,9 +153,9 @@ const checkIfLine = (number, bingoCard) => {
     }
 
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const isBingo = (bingoCard) => {
@@ -169,9 +171,9 @@ const isBingo = (bingoCard) => {
 
   if (matchedNumbers === 15) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const askToPlayAgain = () => {
@@ -186,9 +188,9 @@ const askToPlayAgain = () => {
 
   if (playAgain.toLowerCase() === "yes") {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const askIfAnotherPlayer = () => {
@@ -205,9 +207,9 @@ const askIfAnotherPlayer = () => {
 
   if (anotherPlayer.toLowerCase() === "yes") {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const showPointsSystem = () => {
@@ -218,7 +220,7 @@ const showPointsSystem = () => {
 };
 
 const usersRanking = (name, points, allUsers) => {
-  let user = { userName: name, userPoints: points };
+  const user = { userName: name, userPoints: points };
   allUsers.push(user);
 
   allUsers.sort((a, b) => b.userPoints - a.userPoints);
@@ -230,13 +232,13 @@ const usersRanking = (name, points, allUsers) => {
   });
 };
 
-let rankingList = [];
+const rankingList = [];
 let numberOfLines = 0;
 
 const bingo = () => {
   let card = [];
 
-  let name = getName();
+  const name = getName();
   showPointsSystem();
 
   let generatedCard = generateMyCard();
@@ -249,7 +251,7 @@ const bingo = () => {
 
   card = generatedCard;
 
-  let playedNumbers = [];
+  const playedNumbers = [];
   let turns = 0;
   let points = 90;
   numberOfLines = 0;
@@ -258,11 +260,11 @@ const bingo = () => {
     turns++;
     points -= 1;
 
-    let randomNumber = generateRandomNumberNotYetPlayed(playedNumbers);
+    const randomNumber = generateRandomNumberNotYetPlayed(playedNumbers);
     playedNumbers.push(randomNumber);
     alert(`The number is ${randomNumber}.`);
 
-    let isMatched = checkIfMatched(randomNumber, card);
+    const isMatched = checkIfMatched(randomNumber, card);
     showMyCard(card);
 
     if (isMatched) {
@@ -276,7 +278,7 @@ const bingo = () => {
     );
     usersRanking(name, points, rankingList);
 
-    let playAgain = askToPlayAgain();
+    const playAgain = askToPlayAgain();
     if (playAgain) {
       bingo();
     } else {

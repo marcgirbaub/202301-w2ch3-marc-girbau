@@ -719,43 +719,28 @@ const getName = () => {
 const isWordCorrect = (answer, word) => {
   if (word.toLowerCase() === answer) {
     return true;
-  } else {
-    return false;
   }
-};
 
-const isPasapalabraFinished = (questions) => {
-  let numberOfQuestionsAnswered = 0;
-  questions.forEach((question) => {
-    if (question.status !== 0) {
-      numberOfQuestionsAnswered++;
-    }
-  });
-
-  if (numberOfQuestionsAnswered === questions.length) {
-    return true;
-  } else {
-    return false;
-  }
+  return false;
 };
 
 const checkStatusQuestion = (status) => {
   if (status === 0) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const isTimeValid = (initialTime) => {
-  let currentTime = Date.now();
-  let validTime = initialTime + ALLOWED_SECONDS;
+  const currentTime = Date.now();
+  const validTime = initialTime + ALLOWED_SECONDS;
 
   if (currentTime <= validTime) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const askQuestionAndCheckAnswer = (questions, initialTime) => {
@@ -763,9 +748,9 @@ const askQuestionAndCheckAnswer = (questions, initialTime) => {
   let i = 0;
 
   while (areQuestionsRemaining(questions)) {
-    const currentQuestion = questions[i]["question"];
-    const currentCorrectAnswer = questions[i]["answer"];
-    const currentStatus = questions[i]["status"];
+    const currentQuestion = questions[i].question;
+    const currentCorrectAnswer = questions[i].answer;
+    const currentStatus = questions[i].status;
 
     if (checkStatusQuestion(currentStatus)) {
       do {
@@ -774,22 +759,28 @@ const askQuestionAndCheckAnswer = (questions, initialTime) => {
 
       if (!isTimeValid(initialTime)) {
         return TIME_OUT;
-      } else if (userAnswer.toUpperCase() === "END") {
+      }
+
+      if (userAnswer.toUpperCase() === "END") {
         return END;
-      } else if (isWordCorrect(currentCorrectAnswer, userAnswer)) {
+      }
+
+      if (isWordCorrect(currentCorrectAnswer, userAnswer)) {
         alert("¡Correct answer!");
-        questions[i]["status"] = 1;
+        questions[i].status = 1;
       } else if (userAnswer.toLowerCase() !== "pasapalabra") {
         alert("¡Wrong answer!");
-        questions[i]["status"] = 2;
+        questions[i].status = 2;
       }
     }
+
     if (i === questions.length - 1) {
       i = 0;
     } else {
       i++;
     }
   }
+
   return NEXT;
 };
 
@@ -828,9 +819,9 @@ const areQuestionsRemaining = (questions) => {
 
   if (remainingQuestions === 0) {
     return false;
-  } else {
-    return true;
   }
+
+  return true;
 };
 
 const printScore = (correctAnswers, wrongAnswers, remainingQuestions) => {
@@ -851,10 +842,10 @@ const usersRankingAndPrint = (
   wrongAnswers,
   allUsersRanking
 ) => {
-  let user = {
-    userName: userName,
-    correctAnswers: correctAnswers,
-    wrongAnswers: wrongAnswers,
+  const user = {
+    userName,
+    correctAnswers,
+    wrongAnswers,
   };
 
   allUsersRanking.push(user);
@@ -865,13 +856,13 @@ const usersRankingAndPrint = (
 };
 
 const askToPlayAgain = () => {
-  let wishToPlayAgain = confirm("Do you want to play again?");
+  const wishToPlayAgain = confirm("Do you want to play again?");
 
   if (wishToPlayAgain) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const restartStatus = (questionsArray) => {
@@ -882,21 +873,22 @@ const restartStatus = (questionsArray) => {
   });
 };
 
-let rankingList = [];
+const rankingList = [];
 let indexQuestions = 0;
 
 const pasapalabra = (questionsArray) => {
-  let questions = questionsArray[indexQuestions];
-  let userName = getName();
+  const questions = questionsArray[indexQuestions];
+  const userName = getName();
   let wishToEnd = false;
-  let initialTime = Date.now();
+  const initialTime = Date.now();
   let isTimeValid = true;
 
-  let askQuestions = askQuestionAndCheckAnswer(questions, initialTime);
+  const askQuestions = askQuestionAndCheckAnswer(questions, initialTime);
 
   if (askQuestions === END) {
     wishToEnd = true;
   }
+
   if (askQuestions === TIME_OUT) {
     isTimeValid = false;
   }
@@ -905,9 +897,9 @@ const pasapalabra = (questionsArray) => {
     alert("Time is over!");
   }
 
-  let correctAnswers = checkCorrectAnswers(questions);
-  let wrongAnswers = checkWrongAnswers(questions);
-  let remainingQuestions = questions.length - (correctAnswers + wrongAnswers);
+  const correctAnswers = checkCorrectAnswers(questions);
+  const wrongAnswers = checkWrongAnswers(questions);
+  const remainingQuestions = questions.length - (correctAnswers + wrongAnswers);
 
   printScore(correctAnswers, wrongAnswers, remainingQuestions);
 
