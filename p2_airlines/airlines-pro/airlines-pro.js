@@ -42,9 +42,9 @@ function showFlights(flights) {
 function reduceFunctionAvgCost(accumulator, currentValue, index) {
   if (index > 0) {
     return accumulator + currentValue.cost;
-  } else {
-    return accumulator;
   }
+
+  return accumulator;
 }
 
 function calculateAndShowAverageCost(flights) {
@@ -57,10 +57,11 @@ function calculateAndShowAverageCost(flights) {
 
 function reduceFunctionCountScales(accumulator, currentValue) {
   if (currentValue.scale === true) {
-    return (accumulator += 1);
-  } else {
+    accumulator += 1;
     return accumulator;
   }
+
+  return accumulator;
 }
 
 function showNumberOfScales(flights) {
@@ -75,7 +76,7 @@ function showLastDestinations(objectsArray) {
   let lastDestinations = "";
 
   for (let i = 5; i < objectsArray.length; i++) {
-    const currentDestination = objectsArray[i]["to"];
+    const currentDestination = objectsArray[i].to;
     lastDestinations = lastDestinations + currentDestination + ", ";
   }
 
@@ -137,12 +138,13 @@ function doesIdExist(flights, id) {
   let existence = false;
 
   for (let i = 0; i < flights.length; i++) {
-    let currentP = flights[i];
+    const currentP = flights[i];
 
     if (currentP.id === id) {
       existence = true;
     }
   }
+
   return existence;
 }
 
@@ -159,6 +161,7 @@ function deleteFlights(flights) {
     alert("Please insert an ID number");
     return deleteFlights(flights);
   }
+
   if (doesIdExist(flights, Number(flightToDelete)) === false) {
     alert("The ID introduced does not exist. Please enter a valid ID");
     return deleteFlights(flights);
@@ -167,7 +170,7 @@ function deleteFlights(flights) {
   let positionToDelete = "";
 
   for (let i = 0; i < flights.length; i++) {
-    let currentP = flights[i];
+    const currentP = flights[i];
 
     if (currentP.id === Number(flightToDelete)) {
       positionToDelete = i;
@@ -180,8 +183,6 @@ function deleteFlights(flights) {
 
   if (wantToDoMore("delete")) {
     deleteFlights(flights);
-  } else {
-    return;
   }
 }
 
@@ -197,9 +198,9 @@ function askAndReturnIfScale() {
 
   if (scale === "yes") {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
 function getPrice() {
@@ -234,7 +235,7 @@ function createFlights(flights) {
     deleteFlights(flights);
   } else {
     const newFlight = {};
-    newFlight.id = flights[flights.length - 1]["id"] + 1;
+    newFlight.id = flights[flights.length - 1].id + 1;
     newFlight.to = checkIfWord("to");
     newFlight.from = checkIfWord("from");
     newFlight.cost = getPrice();
@@ -263,13 +264,13 @@ function askIfAnotherOperation() {
 
   if (ifAnotherOperation.toLowerCase() === "yes") {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
 function doAdminActions(listOfFlights) {
-  let typeOfOperation = getTypeOfOperationAdmin();
+  const typeOfOperation = getTypeOfOperationAdmin();
 
   if (typeOfOperation === "create") {
     createFlights(listOfFlights);
@@ -278,6 +279,7 @@ function doAdminActions(listOfFlights) {
       doAdminActions(listOfFlights);
     }
   }
+
   if (typeOfOperation === "delete") {
     deleteFlights(listOfFlights);
     showFlights(listOfFlights);
@@ -288,8 +290,8 @@ function doAdminActions(listOfFlights) {
 }
 
 function showFlightByPrice(flights) {
-  let priceToSearch = +prompt(
-    "What is the maximum price you are willing to pay for a flight?"
+  const priceToSearch = Number(
+    prompt("What is the maximum price you are willing to pay for a flight?")
   );
 
   if (!priceToSearch) {

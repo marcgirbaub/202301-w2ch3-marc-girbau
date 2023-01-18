@@ -42,24 +42,18 @@ const getDisplaySmaller = () => {
   displayElement.classList.add("lower");
 };
 
-const addition = (num1, num2) => {
-  return num1 + num2;
-};
+const addition = (num1, num2) => num1 + num2;
 
-const substraction = (num1, num2) => {
-  return num1 - num2;
-};
+const substraction = (num1, num2) => num1 - num2;
 
-const multiplication = (num1, num2) => {
-  return num1 * num2;
-};
+const multiplication = (num1, num2) => num1 * num2;
 
 const division = (num1, num2) => {
   if (num2 === "0" || num2 === 0) {
     return "Error";
-  } else {
-    return num1 / num2;
   }
+
+  return num1 / num2;
 };
 
 const operate = (num1, num2, operation) => {
@@ -77,6 +71,7 @@ const operate = (num1, num2, operation) => {
     case "/":
       result = division(num1, num2);
       break;
+      default;
   }
 
   let finalResult;
@@ -99,27 +94,34 @@ const operate = (num1, num2, operation) => {
 const isLengthGreaterThanSix = (numberString) => {
   if (numberString.length > 6) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 };
 
 const appendNumbers = (clickedNumber) => {
   if (equalsCounter > 0) {
     clear();
   }
+
   deletionCounter = 0;
 
   if (initialNumber.toString().length === 9) {
     return;
-  } else if (clickedNumber === "." && initialNumber.includes(".")) {
+  }
+
+  if (clickedNumber === "." && initialNumber.includes(".")) {
     return;
-  } else if (
+  }
+
+  if (
     initialNumber.includes(".") &&
     initialNumber.slice(initialNumber.indexOf(".") + 1).length >= 3
   ) {
     return;
-  } else if (
+  }
+
+  if (
     initialNumber.toString().length === 1 &&
     initialNumber.toString().charAt(0) === "0" &&
     clickedNumber !== "0" &&
@@ -201,6 +203,7 @@ const calculate = () => {
   if (previousNumber === 0 && currentNumber === 0) {
     return;
   }
+
   result = operate(previousNumber, currentNumber, operation);
   secondNumberOperand = secondNumberOperand.toString();
 
@@ -222,6 +225,7 @@ const calculateWithOperationButton = () => {
   if (previousNumber === 0 && currentNumber === 0) {
     return;
   }
+
   result = operate(previousNumber, currentNumber, operation);
   secondNumberOperand = secondNumberOperand.toString();
 
@@ -268,9 +272,9 @@ const deletion = () => {
 
 const multiplyMinusOne = () => {
   if (firstNumberOperand < 1000000 && operationResult < 1000000) {
-    firstNumberOperand = firstNumberOperand * -1;
-    operationResult = operationResult * -1;
-    lowerDisplay = lowerDisplay * -1;
+    firstNumberOperand *= -1;
+    operationResult *= -1;
+    lowerDisplay *= -1;
   }
 };
 
@@ -299,6 +303,7 @@ operationButtonsEl.forEach((button) => {
       clear();
       updateDisplay();
     }
+
     getDisplayNormal();
     operationButtonCounter++;
 
@@ -307,6 +312,7 @@ operationButtonsEl.forEach((button) => {
       if (operationButtonCounter >= 3) {
         secondNumberOperand = operationResult;
       }
+
       calculateWithOperationButton();
       const operation = button.innerHTML;
       chooseOperation(operation);
@@ -353,6 +359,7 @@ equalsButtonEl.addEventListener("click", () => {
     if (lowerDisplay.length < 6) {
       getDisplayNormal();
     }
+
     if (lowerDisplay.length > 6) {
       getDisplaySmaller();
     }

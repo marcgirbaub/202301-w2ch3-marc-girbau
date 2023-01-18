@@ -30,9 +30,9 @@ function showFlights(flights) {
 function reduceFunctionAvgCost(accumulator, currentValue, index) {
   if (index > 0) {
     return accumulator + currentValue.cost;
-  } else {
-    return accumulator;
   }
+
+  return accumulator;
 }
 
 function calculateAndShowAverageCost(flights) {
@@ -45,10 +45,11 @@ function calculateAndShowAverageCost(flights) {
 
 function reduceFunctionCountScales(accumulator, currentValue) {
   if (currentValue.scale === true) {
-    return (accumulator += 1);
-  } else {
+    accumulator += 1;
     return accumulator;
   }
+
+  return accumulator;
 }
 
 function showNumberOfScales(flights) {
@@ -63,7 +64,7 @@ function showLastDestinations(objectsArray) {
   let lastDestinations = "";
 
   for (let i = 5; i < objectsArray.length; i++) {
-    const currentDestination = objectsArray[i]["to"];
+    const currentDestination = objectsArray[i].to;
     lastDestinations = lastDestinations + currentDestination + ", ";
   }
 

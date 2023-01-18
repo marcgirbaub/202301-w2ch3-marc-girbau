@@ -1,5 +1,3 @@
-"use strict";
-
 function addition(num1, num2) {
   const result = Number(num1) + Number(num2);
   if (Number.isInteger(result)) {
