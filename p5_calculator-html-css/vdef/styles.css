@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
+}
+
+body {
+  background-color: rgba(31, 32, 33, 0.4);
+  transition: filter 0.3s;
+}
+
+.body-light-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calculator-flexbox {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(7, 7, 7);
+  border-radius: 30px;
+  padding: 15px;
+}
+
+button {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #2091ed;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(60, 56, 56, 0.516);
+  opacity: 0.9;
+  border-radius: 15px;
+  transition: opacity 0.15s;
+}
+
+.calculator-flexbox button:hover {
+  opacity: 0.3;
+}
+
+.calculator-flexbox button:active {
+  background-color: rgb(146, 148, 148);
+  color: blue;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 3rem);
+  grid-template-rows: repeat(5, 3rem);
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-top: 5rem;
+  padding-bottom: 0.5rem;
+  color: white;
+  justify-content: space-between;
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-top: 5.063rem;
+  padding-bottom: 0.5rem;
+  color: white;
+  justify-content: space-between;
+}
+
+.previous-operand {
+  flex: 1.5;
+  font-size: 1rem;
+  padding-bottom: 2rem;
+}
+
+.current-operand {
+  flex: 2;
+  font-size: 3.5rem;
+}
+
+.operand {
+  background-color: #2091ed;
+  color: white;
+}
+
+.AC {
+  background-color: rgb(78, 79, 80);
+  color: white;
+}
+
+.material-symbols-outlined {
+  background-color: rgb(78, 79, 80);
+  color: white;
+}
+
+.equals {
+  background-color: #0359b5;
+  color: white;
+  grid-column: span 2;
+}
+
+.current-operand-smaller {
+  flex: 2;
+  font-size: 2.5rem;
+  margin-top: 18px;
+}
+
+.dark-mode-button {
+  margin-top: 35px;
+  -webkit-appearance: none;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  background-color: rgb(228, 221, 221);
+  transition: background-color 0.3s;
+}
+
+.dark-mode-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  height: 1.25rem;
+  width: 1.25rem;
+  background-color: #0359b5;
+  transition: left 0.3s;
+}
+
+.dark-mode-button:checked::after {
+  left: 70%;
+}
