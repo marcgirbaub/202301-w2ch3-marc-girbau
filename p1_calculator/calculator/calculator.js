@@ -1,39 +1,39 @@
 "use strict";
 
 function addition(num1, num2) {
-  let result = Number(num1) + Number(num2);
+  const result = Number(num1) + Number(num2);
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return result.toFixed(3);
   }
+
+  return result.toFixed(3);
 }
 
 function substraction(num1, num2) {
-  let result = num1 - num2;
+  const result = num1 - num2;
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return result.toFixed(3);
   }
+
+  return result.toFixed(3);
 }
 
 function multiplication(num1, num2) {
-  let result = num1 * num2;
+  const result = num1 * num2;
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return result.toFixed(3);
   }
+
+  return result.toFixed(3);
 }
 
 function division(num1, num2) {
-  let result = num1 / num2;
+  const result = num1 / num2;
   if (Number.isInteger(result)) {
     return result;
-  } else {
-    return result.toFixed(3);
   }
+
+  return result.toFixed(3);
 }
 
 function additionShown(num1, num2) {
@@ -53,8 +53,8 @@ function divisionShown(num1, num2) {
 }
 
 function calculator() {
-  let firstNumber = prompt("Type the first number you want to operate");
-  let secondNumber = prompt("Type the second number you want to operate");
+  const firstNumber = prompt("Type the first number you want to operate");
+  const secondNumber = prompt("Type the second number you want to operate");
 
   if (isNaN(firstNumber) && isNaN(secondNumber)) {
     alert("Both values introduced are not numbers");
@@ -81,10 +81,10 @@ function calculator() {
   } else {
     let calculationResult = [];
 
-    let resultAddition = additionShown(firstNumber, secondNumber);
-    let resultSubstraction = substractionShown(firstNumber, secondNumber);
-    let resultMultiplication = multiplicationShown(firstNumber, secondNumber);
-    let resultDivision = divisionShown(firstNumber, secondNumber);
+    const resultAddition = additionShown(firstNumber, secondNumber);
+    const resultSubstraction = substractionShown(firstNumber, secondNumber);
+    const resultMultiplication = multiplicationShown(firstNumber, secondNumber);
+    const resultDivision = divisionShown(firstNumber, secondNumber);
 
     calculationResult = [
       resultAddition,
